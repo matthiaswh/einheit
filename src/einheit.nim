@@ -13,8 +13,7 @@
 ##      self.checkRaises(OSError, newException(OSError, "OS is exploding!"))
 ##
 import macros
-import unicode
-import strutils except toLower
+import strutils
 import tables
 import typetraits
 when defined(ECMAScript):
@@ -93,15 +92,6 @@ macro toString*(obj: typed): untyped =
       template toStrAst(obj): string =
         $(obj)
       result = getAst(toStrAst(obj))
-
-proc `==`*[T](ar: openarray[T], ar2: openarray[T]): bool =
-  ## helper proc to compare arrays
-  if len(ar) != len(ar2):
-    return false
-  for i in countup(0, ar.len()):
-    if ar[i] != ar2[i]:
-      return false
-  return true
 
 # ----------------------- Test Suite Types ------------------------------------
 type
